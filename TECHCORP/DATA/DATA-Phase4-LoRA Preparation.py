@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import numpy as np
+import glob
 from sklearn.model_selection import train_test_split
 from pathlib import Path
 
@@ -16,10 +17,16 @@ val_json_path = project_root / "medical_lora_val.json"
 test_json_path = project_root / "medical_lora_test.json"
 results_json_path = project_root / "phase4_lora_results.json"
 
-# Charger le dataset nettoyé
+# Charger le dataset nettoyé (fichiers splités)
 print("\nChargement du dataset...")
-df = pd.read_parquet(clean_parquet_path)
-print(f"Dataset chargé: {len(df):,} lignes")
+parquet_files = sorted(glob.glob(str(project_root / "DATA" / "medical_datase_clean_part*.parquet")))
+if parquet_files:
+    dfs = [pd.read_parquet(f) for f in parquet_files]
+    df = pd.concat(dfs, ignore_index=True)
+    print(f"Donnees chargees: {len(df):,} lignes (from {len(parquet_files)} parts)")
+else:
+    df = pd.read_parquet(clean_parquet_path)
+    print(f"Dataset chargé: {len(df):,} lignes (fichier original)")
 
 # ====== 1. CREER LES PAIRS ======
 # Formater les donnees au format LoRA (instruction-input-output)

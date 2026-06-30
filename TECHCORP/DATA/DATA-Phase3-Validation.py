@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import re
+import glob
 from pathlib import Path
 
 print("="*80)
@@ -11,10 +12,16 @@ print("="*80)
 project_root = Path(__file__).parent.parent
 clean_parquet_path = project_root / "medical_datase_clean.parquet"
 
-# Charger le dataset nettoyé
+# Charger le dataset nettoyé (fichiers splités)
 print("\nChargement du dataset...")
-df_clean = pd.read_parquet(clean_parquet_path)
-print(f"Dataset chargé: {len(df_clean):,} lignes")
+parquet_files = sorted(glob.glob(str(project_root / "DATA" / "medical_datase_clean_part*.parquet")))
+if parquet_files:
+    dfs = [pd.read_parquet(f) for f in parquet_files]
+    df_clean = pd.concat(dfs, ignore_index=True)
+    print(f"Donnees chargees: {len(df_clean):,} lignes (from {len(parquet_files)} parts)")
+else:
+    df_clean = pd.read_parquet(clean_parquet_path)
+    print(f"Dataset chargé: {len(df_clean):,} lignes (fichier original)")
 
 # ====== 1. COHERENCE Q/R ======
 # Verifier que la reponse du docteur repond vraiment a la question

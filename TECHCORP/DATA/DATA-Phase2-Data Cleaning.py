@@ -2,6 +2,7 @@ import pandas as pd
 import unicodedata
 import re
 from pathlib import Path
+import glob
 
 print("="*80)
 print("PHASE 2: NETTOYAGE DES DONNEES")
@@ -9,13 +10,19 @@ print("="*80)
 
 # Chemins dynamiques
 project_root = Path(__file__).parent.parent
-medical_datase_path = project_root / "medical_datase" / "dialogues.parquet"
-output_path = project_root / "medical_datase_clean.parquet"
+medical_datase_dir = project_root / "medical_datase"
 
-# Charger les donnees
+# Charger les donnees (fichiers splites)
 print("\nChargement des donnees...")
-df = pd.read_parquet(medical_datase_path)
-print(f"Donnees chargees: {len(df):,} lignes")
+parquet_files = sorted(glob.glob(str(medical_datase_dir / "dialogues_part*.parquet")))
+if parquet_files:
+    dfs = [pd.read_parquet(f) for f in parquet_files]
+    df = pd.concat(dfs, ignore_index=True)
+    print(f"Donnees chargees: {len(df):,} lignes (from {len(parquet_files)} parts)")
+else:
+    medical_datase_path = medical_datase_dir / "dialogues.parquet"
+    df = pd.read_parquet(medical_datase_path)
+    print(f"Donnees chargees: {len(df):,} lignes (fichier original)")
 
 initial_count = len(df)
 

@@ -15,6 +15,7 @@ Note: Ce script nécessite un GPU (RTX 3090 ou mieux)
 
 import os
 import json
+import glob
 import torch
 from pathlib import Path
 from datetime import datetime
@@ -67,10 +68,24 @@ print("2. CHARGEMENT DES DONNÉES")
 print("="*80)
 
 def load_dataset_from_json(file_path):
-    """Charger le dataset JSON au format instruction-input-output"""
-    print(f"Chargement {file_path}...")
-    with open(file_path) as f:
-        data = json.load(f)
+    """Charger le dataset JSON au format instruction-input-output (gère les fichiers splitté)"""
+    data = []
+
+    # Chercher les fichiers splitté (e.g., medical_lora_train_part1.json, part2.json, etc.)
+    base_path = str(file_path).replace('.json', '')
+    part_files = sorted(glob.glob(f"{base_path}_part*.json"))
+
+    if part_files:
+        print(f"Chargement des fichiers splitté ({len(part_files)} parts)...")
+        for part_file in part_files:
+            with open(part_file) as f:
+                data.extend(json.load(f))
+        print(f"  → {len(data)} samples chargés depuis {len(part_files)} parts")
+    else:
+        print(f"Chargement {file_path}...")
+        with open(file_path) as f:
+            data = json.load(f)
+        print(f"  → {len(data)} samples chargés")
 
     # Formatter pour SFT (Supervised Fine-Tuning)
     texts = []
@@ -82,7 +97,6 @@ Input: {item.get('input', '')}
 Output: {item['output']}"""
         texts.append({"text": text})
 
-    print(f"  → {len(texts)} samples chargés")
     return Dataset.from_dict({"text": texts})
 
 try:

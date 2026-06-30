@@ -3,6 +3,7 @@ import numpy as np
 from collections import Counter
 import re
 from pathlib import Path
+import glob
 
 print("="*80)
 print("PHASE 1: EXPLORATION & ANALYSE DES DONNEES")
@@ -10,11 +11,19 @@ print("="*80)
 
 # Chemins dynamiques
 project_root = Path(__file__).parent.parent
-medical_datase_path = project_root / "medical_datase" / "dialogues.parquet"
+medical_datase_dir = project_root / "medical_datase"
 
-# Charger les donnees
+# Charger les donnees (fichiers splites)
 print("\nChargement des donnees...")
-df = pd.read_parquet(medical_datase_path)
+parquet_files = sorted(glob.glob(str(medical_datase_dir / "dialogues_part*.parquet")))
+if parquet_files:
+    dfs = [pd.read_parquet(f) for f in parquet_files]
+    df = pd.concat(dfs, ignore_index=True)
+    print(f"Fichiers charges: {[Path(f).name for f in parquet_files]}")
+else:
+    medical_datase_path = medical_datase_dir / "dialogues.parquet"
+    df = pd.read_parquet(medical_datase_path)
+    print("Utilisation du fichier original")
 print(f"OK - {len(df)} lignes chargees\n")
 
 # ====== STATISTIQUES GENERALES ======

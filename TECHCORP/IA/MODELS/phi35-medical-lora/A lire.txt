@@ -1,0 +1,1 @@
+Entrainer le modèle prends trop de temps (plusieurs heures) le script est donc fourni avec, il permet de généré un .bin utile pour le chatbot entrainé sur les données médicales

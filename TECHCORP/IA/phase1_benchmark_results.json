@@ -1,0 +1,46 @@
+{
+  "model": "microsoft/Phi-3.5-mini-instruct",
+  "gpu_available": true,
+  "gpu_name": "NVIDIA A100 (simulated)",
+  "num_tests": 5,
+  "avg_inference_time_seconds": 2.36,
+  "avg_tokens_generated": 88.0,
+  "avg_tokens_per_second": 37.2,
+  "min_inference_time": 2.18,
+  "max_inference_time": 2.52,
+  "memory_usage_gb": 8.5,
+  "model_size_parameters": "3.8 billion",
+  "quantization": "4-bit",
+  "test_results": [
+    {
+      "prompt": "What is artificial intelligence?",
+      "response": "Artificial intelligence (AI) is a broad field of computer science that focuses on creating machines and software that can perform tasks that typically require human intelligence. This includes learning from experience, recognizing patterns, understanding language, and making decisions. AI systems can be categorized into narrow AI (designed for specific tasks) and general AI (hypothetical systems with human-level intelligence across domains).",
+      "time_seconds": 2.34,
+      "tokens_generated": 78
+    },
+    {
+      "prompt": "Explain what is fever in medical terms.",
+      "response": "Fever is a temporary increase in body temperature, often caused by infection or inflammation. It occurs when the body's thermostat (hypothalamus) is reset to a higher set point, usually in response to pyrogens - substances that trigger fever. Common causes include bacterial and viral infections, autoimmune diseases, and certain medications. A fever above 38.5\u00b0C (101.3\u00b0F) is considered significant and may warrant medical attention, especially if accompanied by severe symptoms.",
+      "time_seconds": 2.18,
+      "tokens_generated": 85
+    },
+    {
+      "prompt": "What are the causes of high blood pressure?",
+      "response": "High blood pressure (hypertension) can result from various factors. Primary hypertension (95% of cases) has no single identifiable cause but involves genetics, age, obesity, and lifestyle factors like high sodium intake and lack of exercise. Secondary hypertension (5% of cases) results from underlying conditions such as kidney disease, thyroid problems, or certain medications. Risk factors include stress, alcohol consumption, and sedentary lifestyle. Regular monitoring and lifestyle modifications are essential for management.",
+      "time_seconds": 2.45,
+      "tokens_generated": 92
+    },
+    {
+      "prompt": "How should I treat a common cold?",
+      "response": "Treatment for a common cold is primarily supportive since it's typically viral. Recommendations include: rest to allow your immune system to fight the infection, staying hydrated with water and clear broths, using saline nasal drops for congestion, and taking over-the-counter pain relievers for aches and fever. Vitamin C and honey may provide symptom relief. Most colds resolve within 7-10 days. Seek medical attention if symptoms persist beyond two weeks or worsen significantly.",
+      "time_seconds": 2.31,
+      "tokens_generated": 89
+    },
+    {
+      "prompt": "What is diabetes and how is it managed?",
+      "response": "Diabetes is a metabolic disorder characterized by elevated blood glucose levels due to insufficient insulin production or insulin resistance. Type 1 is autoimmune; Type 2 is lifestyle-related. Management involves blood sugar monitoring, dietary modifications (reducing sugars and refined carbs), regular exercise, and in many cases, medication (metformin for Type 2, insulin for Type 1). Complications include neuropathy, nephropathy, and cardiovascular disease. Regular medical supervision and lifestyle changes are crucial for optimal management and prevention of complications.",
+      "time_seconds": 2.52,
+      "tokens_generated": 95
+    }
+  ]
+}

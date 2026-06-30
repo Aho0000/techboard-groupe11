@@ -1,0 +1,19 @@
+{
+  "total_pairs": 239429,
+  "train_size": 191543,
+  "val_size": 23943,
+  "test_size": 23943,
+  "train_ratio": 79.99991646792995,
+  "val_ratio": 10.000041766035025,
+  "test_ratio": 10.000041766035025,
+  "avg_tokens_per_pair": 246.5180912379988,
+  "max_tokens_per_pair": 801.0,
+  "min_tokens_per_pair": 22.5,
+  "gpu_compatible_percentage": 100.0,
+  "instruction_avg_length": 58.36936875792903,
+  "input_avg_length": 416.5890374485103,
+  "output_avg_length": 511.1139587455558,
+  "instruction_max_length": 130,
+  "input_max_length": 1589,
+  "output_max_length": 1594
+}

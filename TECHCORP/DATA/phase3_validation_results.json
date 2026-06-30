@@ -1,0 +1,13 @@
+{
+  "coherence_score": 6.74020273233401,
+  "medical_quality_score": 97.45352484452593,
+  "format_quality_score": 78.42742524923881,
+  "high_coherence": 16138,
+  "medium_coherence": 94944,
+  "low_coherence": 128347,
+  "dangerous_responses": 497,
+  "low_medical_vocab": 5600,
+  "well_formatted": 187778,
+  "format_issues": 51651,
+  "total_lines": 239429
+}

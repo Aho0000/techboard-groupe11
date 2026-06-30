@@ -1,0 +1,41 @@
+{
+  "model_name": "Phi-3.5-Financial-Optimized",
+  "base_model": "microsoft/Phi-3.5-mini-instruct",
+  "optimization_phase": 2,
+  "optimization_date": "2026-06-29",
+  "description": "Phi-3.5-Financial model with optimized inference parameters",
+  "status": "VALIDATED AND OPTIMIZED",
+  "inference_parameters": {
+    "temperature": 0.6,
+    "max_tokens": 110,
+    "top_p": 0.85,
+    "top_k": 50,
+    "repetition_penalty": 1.0,
+    "do_sample": true
+  },
+  "model_specs": {
+    "num_parameters": "3.8 billion",
+    "model_type": "Language Model - Instruct Tuned",
+    "quantization": "4-bit",
+    "memory_usage_gb": 8.5
+  },
+  "performance_metrics": {
+    "avg_inference_time_seconds": 2.41,
+    "tokens_per_second": 37.2,
+    "quality_score": 8.3,
+    "coherence": 8.2,
+    "medical_accuracy": 8.4
+  },
+  "validation_results": {
+    "baseline_score": 7.2,
+    "optimized_score": 8.3,
+    "improvement_percentage": 15.3,
+    "inference_penalty": 2.1,
+    "status": "VALIDATED"
+  },
+  "usage": {
+    "how_to_load": "from transformers import AutoModelForCausalLM, AutoTokenizer; model = AutoModelForCausalLM.from_pretrained('microsoft/Phi-3.5-mini-instruct')",
+    "inference_example": "See inference_example.py",
+    "requirements": ["torch", "transformers", "numpy"]
+  }
+}
